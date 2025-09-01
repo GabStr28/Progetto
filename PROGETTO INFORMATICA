@@ -1,1 +1,15 @@
+#include <stdio.h>
+int main() {
+  int scelta;
+  printf("<<<Benvenuti allo Sportello Postale>>>\n");
+  printf("1. Prendi numero\n");
+  printf("2. Servi Cliente\n");
+  printf("3. Annulla ultimo\n");
+  printf("4. Stampa storico\n");
+  printf("5. Report ordinario e ricerca\n");
+  printf("0. Esci\n");
+  printf("Scegli l'operazione da fare: ");
+  scanf("%d", &scelta);
 
+
+}
