@@ -1,7 +1,7 @@
 #include <stdio.h>
 int main() {
   int scelta;
-  printf("<<<BENVENUTI ALLO SPPRTELLO POSTALE>>>\n");
+  printf("---BENVENUTI ALLO SPPRTELLO POSTALE---\n");
   printf("1. Prendi numero\n");
   printf("2. Servi Cliente\n");
   printf("3. Annulla ultimo\n");
