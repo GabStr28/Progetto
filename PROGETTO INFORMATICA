@@ -27,7 +27,7 @@ do{
   printf("4=Stampa storico\n");
   printf("5=Report ordinario e ricerca\n");
   printf("0=Esci\n");
-  printf("Scegli l'operazione da fare: ");
+  printf("Scegli l'operazione da fare: \n");
   scanf("%d", &scelta);
 
          if (scelta == 1) {
