@@ -13,6 +13,9 @@ int main() {
     int i;
     for (i = 0; i < SPORTELLI; i++)
          initCoda(&sportelli[i]);       //vado ad azzerrare tutte le code per ogni sportello
+
+    Nodo *storico = NULL;               // definisco una variabile *storico
+    NodoPila *undo = NULL;
     Cliente elenco[DIM];                //dichiaro un array di tipo cliente chiamato elenco
     int nServiti = 0;                    // dichiare una variabile che mi dice il numero dei clienti serviti
 
@@ -65,7 +68,17 @@ do{
                 Cliente servito = dequeue(&sportelli[tipo-1]);       //tolgo il cliente dalla coda 
                 printf("Servendo %s (num %d) allo sportello %d (%s)\n",
                        servito.nome, servito.numero, tipo, servito.tipoOperazione);     //scrivo i dati del cliente servito 
-                       }
+
+                inserisciInLista(&storico, servito);
+                elenco[nServiti++] = servito;
+                inserimento(&undo, servito);
+                salvaClienteTesto(servito);
+                salvaClienteBin(servito);
+                       
+                 }else {
+                printf("Nessun cliente in attesa!\n");
+            }
+      }
 
    } while (scelta != 0);
 
