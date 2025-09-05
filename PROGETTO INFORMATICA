@@ -1,4 +1,12 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "definizione.h"
+#define MAXNOME 30
+#define MAXTIPO 30        //dimensione array
+#define DIM 100
+#define SPORTELLI 3
+
 int main() {
     printf("Benvenuto allo sportello postale\n");
     Coda sportelli[SPORTELLI];    //Creo una coda per ogni sportello
