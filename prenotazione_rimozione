@@ -1,0 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "definizione.h"
+
+void initCoda(Coda *c) { 
+    c->front = c->rear = c->count = 0; }   //azzero la coda di ogni sportello 
