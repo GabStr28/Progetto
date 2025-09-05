@@ -15,3 +15,4 @@ typedef struct {                       //andiamo ad dichiarare una struct Coda l
     int front, rear, count;
 } Coda;
 
+void initCoda(Coda *c);
