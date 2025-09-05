@@ -54,7 +54,19 @@ do{
             } else {
                 numeroProgressivo--;     //coda piena
             }
-      }
+      } else if (scelta == 2) {
+            printf("Quale sportello servire (1-3)? ");
+            scanf("%d", &tipo);
+            if (tipo < 1 || tipo > SPORTELLI) {
+                printf("Sportello non valido.\n");
+                continue;
+            }
+            if (!codaVuota(&sportelli[tipo-1])) {               //verifico che la coda non è vuota 
+                Cliente servito = dequeue(&sportelli[tipo-1]);       //tolgo il cliente dalla coda 
+                printf("Servendo %s (num %d) allo sportello %d (%s)\n",
+                       servito.nome, servito.numero, tipo, servito.tipoOperazione);     //scrivo i dati del cliente servito 
+                       }
+
    } while (scelta != 0);
 
 
