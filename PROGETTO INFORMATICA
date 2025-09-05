@@ -13,7 +13,13 @@ int main() {
     int i;
     for (i = 0; i < SPORTELLI; i++)
          initCoda(&sportelli[i]);       //vado ad azzerrare tutte le code per ogni sportello
-  int scelta;
+    Cliente elenco[DIM];                //dichiaro un array di tipo cliente chiamato elenco
+    int nServiti = 0;                    // dichiare una variabile che mi dice il numero dei clienti serviti
+
+    int scelta, tipo, numeroProgressivo = 1;
+    char nome[MAXNOME];
+
+do{
   printf("\n---SPORTELLO POSTALE---\n");
   printf("1=Prendi numero\n");
   printf("2=Servi Cliente\n");
@@ -23,6 +29,34 @@ int main() {
   printf("0=Esci\n");
   printf("Scegli l'operazione da fare: ");
   scanf("%d", &scelta);
+
+         if (scelta == 1) {
+            Cliente cl;
+            cl.numero = numeroProgressivo++;      //se la scelta è stata 1 allora vado ad assegnare il numero della persona in fila e vado a segnare i suoi dati (nome , operazione che deve effettuare)
+            printf("Nome cliente: ");
+            scanf("%29s", nome);              // protezione overflow 
+            strcpy(cl.nome, nome);
+            
+            printf("Tipo (1=Bollette, 2=Pacchi, 3=Spedizioni): ");
+            scanf("%d", &tipo);
+            if (tipo < 1 || tipo > SPORTELLI) {
+                printf("Tipo non valido.\n");
+                numeroProgressivo--;         //così se il tipo non e valido ovvero digita un numero diverso da 1,2,3 allora non vado a perdere il numero del prenotato 
+                continue;
+            }
+            if (tipo == 1) strcpy(cl.tipoOperazione, "Bollette");
+            else if (tipo == 2) strcpy(cl.tipoOperazione, "Pacchi");      //verifico il tipo di operazione che l'utente deve effettuare ed vado appunto ad assocciargliela 
+            else strcpy(cl.tipoOperazione, "Spedizioni");
+
+            if (enqueue(&sportelli[tipo-1], cl)) {                    //in questa funzione verifico se la coda è piena, se non è cosi vado appunto a comunicare i dati salvati altrimenti riferisco che la coda è piena 
+                printf("Assegnato numero %d a %s (%s)\n",
+                       cl.numero, cl.nome, cl.tipoOperazione);
+            } else {
+                numeroProgressivo--;     //coda piena
+                printf("\ncoda piena\n");
+            }
+      }
+   } while (scelta != 0);
 
 
 }
