@@ -16,3 +16,4 @@ typedef struct {                       //andiamo ad dichiarare una struct Coda l
 } Coda;
 
 void initCoda(Coda *c);
+int enqueue(Coda *c, Cliente cl);
