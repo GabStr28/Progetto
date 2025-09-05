@@ -1,5 +1,10 @@
 #include <stdio.h>
 int main() {
+    printf("Benvenuto allo sportello postale\n");
+    Coda sportelli[SPORTELLI];    //Creo una coda per ogni sportello
+    int i;
+    for (i = 0; i < SPORTELLI; i++)
+         initCoda(&sportelli[i]);       //vado ad azzerrare tutte le code per ogni sportello
   int scelta;
   printf("\n---SPORTELLO POSTALE---\n");
   printf("1=Prendi numero\n");
