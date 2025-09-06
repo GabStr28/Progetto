@@ -37,4 +37,4 @@ int inserimento(NodoPila **top, Cliente cl);
 void salvaClienteTesto(Cliente cl);
 void salvaClienteBin(Cliente cl);
 
-void menuInput(int *scelta);
+void menu(int *scelta);
