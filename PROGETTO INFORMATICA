@@ -7,80 +7,87 @@
 #define DIM 100
 #define SPORTELLI 3
 
+
 int main() {
-    printf("Benvenuto allo sportello postale\n");
-    Coda sportelli[SPORTELLI];    //Creo una coda per ogni sportello
-    int i;
-    for (i = 0; i < SPORTELLI; i++)
-         initCoda(&sportelli[i]);       //vado ad azzerrare tutte le code per ogni sportello
+    printf("Benvenuto allo sportello postale.\n");
+    Coda sportelli[SPORTELLI];
+    for (int i = 0; i < SPORTELLI; i++) initCoda(&sportelli[i]);
 
-    Nodo *storico = NULL;               // definisco una variabile *storico
+    Nodo *storico = NULL;
     NodoPila *undo = NULL;
-    Cliente elenco[DIM];                //dichiaro un array di tipo cliente chiamato elenco
-    int nServiti = 0;                    // dichiare una variabile che mi dice il numero dei clienti serviti
-
+    Cliente elenco[DIM];
+    int nServiti = 0;
+    int ciclo=1;
     int scelta, tipo, numeroProgressivo = 1;
     char nome[MAXNOME];
 
-do{
-  printf("\n---SPORTELLO POSTALE---\n");
-  printf("1->Prendi numero\n");
-  printf("2->Servi Cliente\n");
-  printf("3->Annulla ultimo\n");
-  printf("4->Stampa storico\n");
-  printf("5->Report ordinario e ricerca\n");
-  printf("0->Esci\n");
-  printf("Scegli l'operazione da fare: ");
-  scanf("%d", &scelta);
+    menuInput(&scelta);
 
-         if (scelta == 1) {
-            Cliente cl;
-            cl.numero = numeroProgressivo++;      //se la scelta è stata 1 allora vado ad assegnare il numero della persona in fila e vado a segnare i suoi dati (nome , operazione che deve effettuare)
-            printf("Nome cliente: ");
-            scanf("%29s", nome);              // protezione overflow 
-            strcpy(cl.nome, nome);
-            
-            printf("Tipo (1=Bollette, 2=Pacchi, 3=Spedizioni): ");
-            scanf("%d", &tipo);
-            if (tipo < 1 || tipo > SPORTELLI) {
-                printf("Tipo non valido.\n");
-                numeroProgressivo--;         //così se il tipo non e valido ovvero digita un numero diverso da 1,2,3 allora non vado a perdere il numero del prenotato 
-                continue;
+    while(ciclo!=0) {
+        switch (scelta) {
+            case 0: {
+                printf("Arrivederci, grazie per averci scelto.\n");
+
+                return 0;
             }
-            if (tipo == 1) strcpy(cl.tipoOperazione, "Bollette");
-            else if (tipo == 2) strcpy(cl.tipoOperazione, "Pacchi");      //verifico il tipo di operazione che l'utente deve effettuare ed vado appunto ad assocciargliela 
-            else strcpy(cl.tipoOperazione, "Spedizioni");
 
-            if (enqueue(&sportelli[tipo-1], cl)) {                    //in questa funzione verifico se la coda è piena, se non è cosi vado appunto a comunicare i dati salvati altrimenti riferisco che la coda è piena 
-                printf("Assegnato numero %d a %s (%s)\n",
-                       cl.numero, cl.nome, cl.tipoOperazione);
-            } else {
-                numeroProgressivo--;     //coda piena
+            case 1: {
+                Cliente cl;
+                cl.numero = numeroProgressivo++;
+                printf("Nome cliente: ");
+                scanf("%29s", nome);
+                strcpy(cl.nome, nome);
+
+                printf("Tipo (1=Bollette, 2=Pacchi, 3=Spedizioni): ");
+                scanf("%d", &tipo);
+                if (tipo < 1 || tipo > SPORTELLI) {
+                    printf("Tipo non valido.\n");
+                    numeroProgressivo--;
+                    break;
+                }
+
+                if (tipo == 1) strcpy(cl.tipoOperazione, "Bollette");
+                else if (tipo == 2) strcpy(cl.tipoOperazione, "Pacchi");
+                else strcpy(cl.tipoOperazione, "Spedizioni");
+
+                if (enqueue(&sportelli[tipo-1], cl)) {
+                    printf("Assegnato numero %d a %s (%s)\n",
+                           cl.numero, cl.nome, cl.tipoOperazione);
+                } else {
+                    numeroProgressivo--;
+                }
+                break;
             }
-      } else if (scelta == 2) {
-            printf("Quale sportello servire (1-3)? ");
-            scanf("%d", &tipo);
-            if (tipo < 1 || tipo > SPORTELLI) {
-                printf("Sportello non valido.\n");
-                continue;
+
+            case 2: {
+                printf("Quale sportello servire (1-3)? ");
+                scanf("%d", &tipo);
+                if (tipo < 1 || tipo > SPORTELLI) {
+                    printf("Sportello non valido.\n");
+                    break;
+                }
+
+                if (!codaVuota(&sportelli[tipo-1])) {
+                    Cliente servito = dequeue(&sportelli[tipo-1]);
+                    printf("Servendo %s (num %d) allo sportello %d (%s)\n",
+                           servito.nome, servito.numero, tipo, servito.tipoOperazione);
+
+                    inserisciInLista(&storico, servito);
+                    elenco[nServiti++] = servito;
+                    inserimento(&undo, servito);
+                    salvaClienteTesto(servito);
+                    salvaClienteBin(servito);
+                } else {
+                    printf("Nessun cliente in attesa!\n");
+                }
+                break;
             }
-            if (!codaVuota(&sportelli[tipo-1])) {               //verifico che la coda non è vuota 
-                Cliente servito = dequeue(&sportelli[tipo-1]);       //tolgo il cliente dalla coda 
-                printf("Servendo %s (num %d) allo sportello %d (%s)\n",
-                       servito.nome, servito.numero, tipo, servito.tipoOperazione);     //scrivo i dati del cliente servito 
+          default:
+                 printf("Comando non valido!\n");
+                 break;
+         }
 
-                inserisciInLista(&storico, servito);
-                elenco[nServiti++] = servito;
-                inserimento(&undo, servito);
-                salvaClienteTesto(servito);
-                salvaClienteBin(servito);
-                       
-                 }else {
-                printf("Nessun cliente in attesa!\n");
-            }
-      }
-
-   } while (scelta != 0);
-
+         menuInput(&scelta);
+     }
 
 }
