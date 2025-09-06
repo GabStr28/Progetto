@@ -31,8 +31,10 @@ int codaVuota(Coda *c);
 Cliente dequeue(Coda *c);
 
 int inserisciInLista(Nodo **head, Cliente cl);
+int rimuoviDaLista(Nodo **head, int numero);
 
 int inserimento(NodoPila **top, Cliente cl);
+int rimozione(NodoPila **top, Cliente *cl);
 
 void salvaClienteTesto(Cliente cl);
 void salvaClienteBin(Cliente cl);
