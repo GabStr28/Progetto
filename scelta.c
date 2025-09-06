@@ -3,7 +3,7 @@
 #include <string.h>
 #include "definizione.h"
 
-void menuInput(int *scelta) {
+void menu(int *scelta) {
     printf("\n=== SPORTELLO POSTALE ===\n");
     printf("0->Esci\n");
     printf("1->Prendi numero\n");
