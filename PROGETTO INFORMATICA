@@ -112,6 +112,11 @@ int main() {
                 }
                 break;
             }
+            case 4: {
+                printf("\n---*STORICO CLIENTI*---\n");
+                stampaLista(storico);        //stampo lo storico ovvero tutti i clienti che ho inserito nella lista 
+                break;
+            }
           default:
                  printf("Comando non valido!\n");                          //questo se per sbaglio nella scelta inserisco un numero che non sia 0,1,2,3,4,5
                  break;
