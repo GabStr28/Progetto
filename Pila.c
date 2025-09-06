@@ -14,3 +14,13 @@ int inserimento(NodoPila **top, Cliente cl) {               //funzione che mi pe
     *top = nuovo;                        //aggiorno la testa 
     return 1;
 }
+
+int rimozione(NodoPila **top, Cliente *cl) {
+    if (*top == NULL)      //verifico se la pila è vuota qualora non sia così procedo
+         return 0;
+    NodoPila *tmp = *top;    //dichiaro una variabile di tipo NodoPila *tmp e la pongo uguale a *top
+    *cl = tmp->cl;    //isneriamo i dati del cliente in tmp
+    *top = tmp->next;   //definisco un nuovo top
+    free(tmp);      //libero lo spazio di memoria 
+    return 1;
+}
