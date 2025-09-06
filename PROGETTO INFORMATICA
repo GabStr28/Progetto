@@ -84,6 +84,34 @@ int main() {
                 }
                 break;
             }
+            case 3: { 
+                Cliente annullato;       //dichiaro un variabile di tipo cliente 
+                if (rimozione(&undo, &annullato)) {        //vado a rimuoverla anche dalla memoria se l'operazione viene eseguita con successo procedo rimuovendolo anche dalla lista     
+                    rimuoviDaLista(&storico, annullato.numero);       //rimuovo cliente dalla lista       
+
+                    if (nServiti > 0 && elenco[nServiti-1].numero == annullato.numero) {       //verifico che il numero dei serviti è maggiore di 0 e che il numero associato all'ultimo cliente aggiunto all'elenco dei serviti sia pari a quello del cliente annullato
+                        nServiti--;      //diminuisco i clienti serviti di uno se la condizione di prima è vera 
+                    } else if (nServiti > 0) {    //altrimenti verifivo solo che i clienti serviti sono più di 0
+                        int k = -1;            //dichiaro una variabile ausiliare k e la pongo pari a 1
+                        for (int i = 0; i < nServiti; i++) {        //cerco nell'elenco dei clienti serviti appunto il cliente annullato verifivando il suo numero associato
+                            if (elenco[i].numero == annullato.numero) { 
+                                k = i; 
+                                break; }
+                        }
+                        if (k >= 0) {               //verifivo appunto che ho trovato il cliente da annullare
+                            for (int i = k; i < nServiti-1; i++) 
+                                 elenco[i] = elenco[i+1];  //scalo tutti i clienti  per occupare il posto che è si è liberato
+                            nServiti--;         //decremento il numero dei clienti serviti
+                        }
+                    }
+
+                    printf("Operazione annullata: cliente %s (num %d)\n",
+                           annullato.nome, annullato.numero);     //comunico i dati del cliente servito 
+                } else {
+                    printf("Nessuna operazione da annullare!\n");       //se non sono c'è il cliente da annullare 
+                }
+                break;
+            }
           default:
                  printf("Comando non valido!\n");                          //questo se per sbaglio nella scelta inserisco un numero che non sia 0,1,2,3,4,5
                  break;
