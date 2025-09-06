@@ -14,3 +14,18 @@ int inserisciInLista(Nodo **head, Cliente cl) {         //funzione che mi permet
     *head = nuovo;                      //aggiorno la testa 
     return 1;
 }
+
+int rimuoviDaLista(Nodo **head, int numero) {     
+    Nodo *prev = NULL, *curr = *head;
+    while (curr != NULL) {
+        if (curr->cl.numero == numero) {
+            if (prev) prev->next = curr->next;
+            else *head = curr->next;
+            free(curr);
+            return 1;
+        }
+        prev = curr;
+        curr = curr->next;
+    }
+    return 0;
+}
