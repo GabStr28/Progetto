@@ -31,10 +31,10 @@ int rimuoviDaLista(Nodo **head, int numero) {
 }
 
 void stampaLista(Nodo *head) {
-    Nodo *p = head;                                       //dichiaro una variabile di tipo nodo e la punto alla testa della lista 
-    while (p != NULL) {                                   //stampo fino a quando non trovo lo spazio vuoto  
+    Nodo *p = head;                                               //dichiaro una variabile di tipo nodo e la punto alla testa della lista 
+    while (p != NULL) {                                           //stampo fino a quando non trovo lo spazio vuoto  
         printf("Num: %d - Nome: %s - Operazione: %s\n",
                p->cl.numero, p->cl.nome, p->cl.tipoOperazione);
-        p = p->next;                                      //passo a quello successivo
+        p = p->next;                                              //passo a quello successivo
     }
 }
