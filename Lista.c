@@ -35,6 +35,6 @@ void stampaLista(Nodo *head) {
     while (p != NULL) {                                   //stampo fino a quando non trovo lo spazio vuoto  
         printf("Num: %d - Nome: %s - Operazione: %s\n",
                p->cl.numero, p->cl.nome, p->cl.tipoOperazione);
-        p = p->next;   //passo a quello successivo
+        p = p->next;                                      //passo a quello successivo
     }
 }
