@@ -16,7 +16,8 @@ int enqueue(Coda *c, Cliente cl) {
         c->rear = (c->rear + 1) % DIM;         //inserisco l'utente in coda 
         c->count++;
         return 1;
-    } else {
+    } 
+    else {
         printf("Coda piena!\n");               //altrimenti la coda è piena e lo comunico 
         return 0;
     }
