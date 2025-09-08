@@ -18,8 +18,7 @@ int main() {
     NodoPila *undo = NULL;
     Cliente elenco[DIM];
     int nServiti = 0;
-    int ciclo=1;
-    int scelta, tipo, numeroProgressivo = 1;             //ho dichiarato delle variabili che utilizzerò in seguito
+    int ciclo, scelta, tipo, numeroProgressivo = 1;             //ho dichiarato delle variabili che utilizzerò in seguito
     char nome[MAXNOME];
 
     menu(&scelta);                                       //apro le varie operazioni che si possono effettuare 
