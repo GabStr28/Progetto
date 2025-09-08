@@ -117,6 +117,48 @@ int main() {
                 stampaLista(storico);                                          //stampo lo storico ovvero tutti i clienti che ho inserito nella lista 
                 break;
             }
+            case 5: {
+                int op;                                  //dichiaro una variabile op che mi serve per verificare la scelta che ha fatto l'utente
+                printf("\n--- REPORT ---\n");
+                printf("1. Ordina per numero \n");
+                printf("2. Ordina per nome \n");
+                printf("3. Ordina per tipo \n");
+                printf("Scelta: ");
+                scanf("%d", &op);                             //propongo le varie scelte e leggo la scelta dell'utente 
+
+                if (op == 1) bubbleSort(elenco, nServiti);               //ordino per numero utilizzo la tipologia bubble
+                else if (op == 2) selectionSort(elenco, nServiti);       //ordino per nome utilizzo la tipologia selection
+                else if (op == 3) insertionSort(elenco, nServiti);       //ordino per tipo utilizzo la tipologia insertion
+
+                for (int i = 0; i < nServiti; i++)
+                    printf("%d - %s - %s\n", elenco[i].numero, elenco[i].nome, elenco[i].tipoOperazione);        //stampo l'eòenco ordinato
+
+                printf("Vuoi cercare un cliente per nome o numero? (1=nome, 2=numero): ");     
+                scanf("%d", &op);                                                                  //cerco cliente o per nome o per numero
+                if (op == 1) {
+                    printf("Inserisci nome: ");
+                    scanf("%29s", nome);                                     //visualizzo il nome da cercare 
+                    int pos = ricercaSequenziale(elenco, nServiti, nome);          //cerco l'utente 
+                    if (pos >= 0) printf("Trovato: %d - %s - %s\n",
+                                         elenco[pos].numero, elenco[pos].nome, elenco[pos].tipoOperazione);      //se lo trovo stampo i dati del cliente 
+                    else
+                            printf("Cliente non trovato.\n");                           //se non lo trovo dico di non aver trovato niente
+                } else if (op == 2) {
+                    int num;
+                    printf("Inserisci numero: ");
+                    scanf("%d", &num);                               //inserisco il numero del cliente che voglio cercare 
+                    Cliente copia[DIM];
+                    for (int i = 0; i < nServiti; i++) 
+                          copia[i] = elenco[i];                     //copio tutto l'elenco in un altro array
+                    bubbleSort(copia, nServiti);                     //ordino l'elenco copiato per numero
+                    int pos = ricercaBinaria(copia, 0, nServiti-1, num);            //cerco il cliente
+                    if (pos >= 0) printf("Trovato: %d - %s - %s\n",
+                                         copia[pos].numero, copia[pos].nome, copia[pos].tipoOperazione);   //se lo trovo scrivo i dati dell'utente
+                    else 
+                         printf("Cliente non trovato.\n");                     //altrimenti dico di non aver trovato nulla
+                }
+                break;
+            }
           default:
                  printf("Comando non valido!\n");                              //questo se per sbaglio nella scelta inserisco un numero che non sia 0,1,2,3,4,5
                  break;
