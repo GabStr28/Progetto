@@ -9,7 +9,7 @@
 
 
 int main() {
-    printf("Benvenuto allo sportello postale.\n");
+    printf("Benvenuti allo sportello postale.\n");
     Coda sportelli[SPORTELLI];                            //vado appunto a dichiarare un array di tipo coda cosi facendo creo una coda per ogni sportello 
     for (int i = 0; i < SPORTELLI; i++)                   //tramite questo vado ad azzerare tutte le code di ogni sportello 
          initCoda(&sportelli[i]);
