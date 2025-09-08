@@ -28,6 +28,7 @@ typedef struct NodoPila {
 void initCoda(Coda *c);
 int enqueue(Coda *c, Cliente cl);
 int codaVuota(Coda *c);
+int codaPiena(Coda *c);
 Cliente dequeue(Coda *c);
 
 int inserisciInLista(Nodo **head, Cliente cl);
@@ -41,3 +42,9 @@ void salvaClienteTesto(Cliente cl);
 void salvaClienteBin(Cliente cl);
 
 void menu(int *scelta);
+
+void bubbleSort(Cliente v[], int n);
+void selectionSort(Cliente v[], int n);
+void insertionSort(Cliente v[], int n);
+int ricercaSequenziale(Cliente v[], int n, char nome[]);
+int ricercaBinaria(Cliente v[], int inizio, int fine, int num);
