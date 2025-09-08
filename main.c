@@ -54,7 +54,7 @@ int main() {
                     printf("Assegnato numero %d a %s (%s)\n",
                            cl.numero, cl.nome, cl.tipoOperazione);
                 } else {
-                    numeroProgressivo--;      //coda piena
+                    numeroProgressivo--;                                      //coda piena
                 }
                 break;
             }
