@@ -48,3 +48,5 @@ void selectionSort(Cliente v[], int n);
 void insertionSort(Cliente v[], int n);
 int ricercaSequenziale(Cliente v[], int n, char nome[]);
 int ricercaBinaria(Cliente v[], int inizio, int fine, int num);
+
+#endif
